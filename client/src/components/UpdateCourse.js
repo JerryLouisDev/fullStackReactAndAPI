@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "./Form";
 
+//using a class component to export class
 export default class UpdateCourse extends Component {
   state = {
     title: "",
@@ -14,14 +15,13 @@ export default class UpdateCourse extends Component {
 
   async componentDidMount() {
     const context = this.props.context;
-    console.log(context);
     const authUser = context.authenticatedUser;
     const id = this.props.match.params.id;
 
-    await context.data
+    context.data
       .getCourse(id)
       .then((course) => {
-        // console.log(id);
+     
         this.setState({
           title: course.title,
           description: course.description,
@@ -29,8 +29,8 @@ export default class UpdateCourse extends Component {
           estimatedTime: course.estimatedTime,
           user: course.User,
         });
-        console.log(course.User);
-        if (authUser.userId !== this.state.user.id) {
+   
+        if (authUser.id !== this.state.user.id) {
           this.props.history.push("/forbidden");
         }
       })
@@ -48,7 +48,7 @@ export default class UpdateCourse extends Component {
       this.props.history.push("/signin");
     }
   }
-
+// returning the format of the update course page
   render() {
     const { title, description, estimatedTime, materialsNeeded, user, errors } =
       this.state;
@@ -102,7 +102,7 @@ export default class UpdateCourse extends Component {
                       id="estimatedTime"
                       name="estimatedTime"
                       type="text"
-                      value={estimatedTime ? estimatedTime : "N/A"}
+                      value={estimatedTime ? estimatedTime : ""}
                       onChange={this.change}
                       placeholder="Estimated Time"
                     />
@@ -114,7 +114,7 @@ export default class UpdateCourse extends Component {
                       id="materialsNeeded"
                       name="materialsNeeded"
                       type="text"
-                      value={materialsNeeded ? materialsNeeded : "N/A"}
+                      value={materialsNeeded ? materialsNeeded : ""}
                       onChange={this.change}
                       placeholder="Materials Needed"
                     />
@@ -127,7 +127,7 @@ export default class UpdateCourse extends Component {
       </div>
     );
   }
-
+// setting new values
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -138,11 +138,11 @@ export default class UpdateCourse extends Component {
       };
     });
   };
-
+//submitting new changes
   submit = () => {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-    const userId = authUser.userId;
+    const userId = authUser.id;
     const { title, description, estimatedTime, materialsNeeded } = this.state;
     const id = this.props.match.params.id;
     const course = {
@@ -162,7 +162,7 @@ export default class UpdateCourse extends Component {
         } else {
           const id = this.props.match.params.id;
           this.props.history.push(`/courses/${id}`);
-          console.log("Hooray! Course updated.");
+          console.log("Yurrrr, the course has been updated!");
         }
       })
       .catch((error) => {
@@ -170,7 +170,7 @@ export default class UpdateCourse extends Component {
         this.props.history.push("/error");
       });
   };
-
+// if user changes mind they can cancel and old information will stay
   cancel = () => {
     const id = this.props.match.params.id;
     this.props.history.push(`/courses/${id}`);

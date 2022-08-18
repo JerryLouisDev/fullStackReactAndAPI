@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import config from "../config";
 import ReactMarkdown from "react-markdown";
 
+//exporting CourseDetail class
 export default class CourseDetail extends Component {
   state = {
     course: {},
     user: {},
   };
   //Using Axios to get course data and user data
-  // Referenced this article for help understanding how to set up fetch request: https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/
-
   componentDidMount() {
     axios
-      .get(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
+      .get(config.apiBaseUrl+`/courses/${this.props.match.params.id}`)
       .then((response) => {
         this.setState({
           course: response.data,
@@ -26,20 +26,18 @@ export default class CourseDetail extends Component {
       });
   }
 
-  // Render course details and offers either full access to edit/delete courses or the ability to navigate back to the course list
+  // Render the course details and offering either full acces or no access to owners of a course
   render() {
     const { course, user } = this.state;
-    //If the user is the owner of the course, allow access
     const context = this.props.context;
     const authUser = context.authenticatedUser;
     return (
       <React.Fragment>
         <div className="actions--bar">
           <div className="wrap">
-            {
-              //if the user is authorized, display "Update", "Delete", and "Return to List" buttons
+            {                  
               authUser ? (
-                authUser.userId === user.id ? (
+                authUser.id === user.id ? (
                   <React.Fragment>
                     <Link
                       className="button"
@@ -62,7 +60,6 @@ export default class CourseDetail extends Component {
                     </Link>
                   </React.Fragment>
                 ) : (
-                  // if user is not authorized, display only "Back" button
                   <React.Fragment>
                     <Link className="button" to="/">
                       {" "}
@@ -82,30 +79,30 @@ export default class CourseDetail extends Component {
           </div>
         </div>
         <div className="wrap">
-          <h2> Course Detail </h2>
+          <h1> Course Detail </h1>
           <form>
             <div className="main--flex">
               <div>
-                <h3 className="course--detail--title">Course</h3>
-                <h4 className="course--name">{course.title}</h4>
-                <p>
+                <h4 className="course--detail--title">Course</h4>
+                <h3 className="course--name">{course.title}</h3>
+                <span>
                   {" "}
                   By {user.firstName} {user.lastName}{" "}
-                </p>
+                </span>
                 <ReactMarkdown children={course.description} />
               </div>
               <div>
                 <h3 className="course--detail--title"> Estimated Time </h3>
                 {course.estimatedTime === null ||
                 course.estimatedTime === "" ? (
-                  <p> N/A </p>
+                  <p> " " </p>
                 ) : (
                   <p> {course.estimatedTime} </p>
                 )}
                 <h3 className="course--detail--title"> Materials Needed </h3>
                 {course.materialsNeeded === null ||
                 course.materialsNeeded === "" ? (
-                  <p> N/A </p>
+                  <p> " " </p>
                 ) : (
                   <ReactMarkdown children={course.materialsNeeded} />
                 )}
@@ -116,7 +113,7 @@ export default class CourseDetail extends Component {
       </React.Fragment>
     );
   }
-  //authenticated user can delete a course using deleteCourse
+  //if user is authenticated they can delete a course
   deleteCourse = () => {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
@@ -127,14 +124,14 @@ export default class CourseDetail extends Component {
         if (errors.length) {
           this.setState({ errors });
         } else {
-          console.log("Hooray! Course deleted.");
+          console.log("Yuurrr, the course is deleted.");
           this.props.history.push("/");
-          window.location.reload(true); // returns user to Course list page
+          window.location.reload(true); // returns user to Main Course page
         }
       })
       .catch((error) => {
         console.log(error);
-        this.props.history.push("/error"); // sends user to "Error" page
+        this.props.history.push("/error"); // sends user to Error page
       });
   };
 }

@@ -9,8 +9,7 @@ export default class CreateCourse extends Component {
     materialsNeeded: "",
     errors: [],
   };
-  // Referenced this post for help understanding inputs: https://stackoverflow.com/questions/37427508/react-changing-an-uncontrolled-input
-
+// returning format of the create course page
   render() {
     const { title, description, estimatedTime, materialsNeeded, errors } =
       this.state;
@@ -92,7 +91,7 @@ export default class CreateCourse extends Component {
       </div>
     );
   }
-
+//  when users make a change to the course
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -103,12 +102,12 @@ export default class CreateCourse extends Component {
       };
     });
   };
-  // creates a course for authorized users, redirects to error page if unauthorized
+  // when an authenticated user decides to submit 
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || { from: { pathname: "/" } };
     const authUser = context.authenticatedUser;
-    const userId = authUser.userId;
+    const userId = authUser.id;
     const { title, description, estimatedTime, materialsNeeded } = this.state;
     const course = {
       title,
@@ -118,7 +117,7 @@ export default class CreateCourse extends Component {
       userId,
     };
 
-    console.log(authUser);
+   
 
     context.data
       .createCourse(course, authUser.emailAddress, authUser.password)
@@ -128,7 +127,7 @@ export default class CreateCourse extends Component {
           this.setState({ errors: user });
         } else {
           this.props.history.push(from);
-          console.log(`Hooray! Course created.`);
+          console.log(`Yurrrr! The course is created!`);
         }
       })
       .catch((error) => {

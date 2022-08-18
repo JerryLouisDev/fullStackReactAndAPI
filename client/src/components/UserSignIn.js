@@ -84,11 +84,11 @@ export default class UserSignIn extends Component {
           //If user exists, sign in is successful and the user is redirected to the Course List page
         } else {
           this.props.history.push(from);
-          console.log(`Sign-in successful for ${emailAddress}!`);
+          console.log(`Sign-in was successful ${emailAddress}!`);
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.error('We have an error:', error);
         this.props.history.push("/error");
       });
   };

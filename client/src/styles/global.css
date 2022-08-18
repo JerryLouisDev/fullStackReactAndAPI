@@ -23,35 +23,60 @@ a {
     color: #939;
     text-decoration: none;
 }
-.wrap {
-    max-width: 1250px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
+
 header {
-    background: #57496e;
+    background: #36583f;
     color: #fff;
     padding: 1rem 0;
     margin-bottom: 2rem;
-}
-.header--flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.header--logo a {
-    font-size: 1.25rem;
-    color: #fff;
 }
 header li {
     font-size: .8rem;
 }
 header nav a {
-    color: #dbd;
+    color: rgb(194, 201, 196);
 }
 header nav a:hover {
     color: #fff;
 }
+form {
+    margin-bottom: 2.5rem;
+}
+label {
+    display: block;
+    font-weight: 300;
+    margin-bottom: .25rem;
+}
+input, textarea {
+    display: block;
+    width: 100%;
+    color: #36583f;
+    border-radius: .5rem;
+    border: 1px solid #8c789b;
+    padding: .5rem;
+    margin-bottom: 1rem;
+    font-family: 'Work Sans', sans-serif;
+    font-size: .8rem;
+}
+textarea {
+    min-height: 300px;
+}
+.wrap {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.header--flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -27px 0px;
+}
+.header--logo a {
+    font-size: 1.25rem;
+    color: rgb(241, 226, 188);
+}
+
 
 .header--signedin li {
     text-align: right;
@@ -62,7 +87,7 @@ header nav a:hover {
     margin-left: .5rem;
 }
 .course--module {
-    background: #7c689b;
+    background: #36583f;
     border-radius: .5rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -80,8 +105,8 @@ header nav a:hover {
     font-size: 1.25rem;
 }
 .course--add--module {
-    background: #ddd9e4;
-    color: #57496e;
+    background: #d3e6d6;
+    color: #36583f;
     font-weight: 300;
     font-size: 1.25rem;
 }
@@ -93,18 +118,19 @@ header nav a:hover {
 }
 .course--detail--title {
     padding-bottom: .25rem;
-    border-bottom: 1px solid #888;
+    border-bottom: 1px solid #36583f;
     margin: 3rem 0 .5rem;
     font-size: .9rem;
-    color: #555;
+    color: rgb(63, 72, 61);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 .course--name {
     font-size: 2rem;
     margin-bottom: .5rem;
+    margin-top: 0rem;
     font-weight: 700;
-    color: #47395e;
+    color: #36583f;
 }
 .course--detail--list {
     font-weight: 300;
@@ -112,7 +138,7 @@ header nav a:hover {
     line-height: 1.5;
 }
 .actions--bar {
-    background: #e9e5f0;
+    background: #d3e6d6;
     padding: 1rem 0;
     margin: -2rem 0 2rem;
 }
@@ -144,30 +170,9 @@ header nav a:hover {
     margin: 0 auto;
     padding: 0 1rem;
 }
-form {
-    margin-bottom: 2.5rem;
-}
-label {
-    display: block;
-    font-weight: 300;
-    margin-bottom: .25rem;
-}
-input, textarea {
-    display: block;
-    width: 100%;
-    color: #332a40;
-    border-radius: .5rem;
-    border: 1px solid #8c789b;
-    padding: .5rem;
-    margin-bottom: 1rem;
-    font-family: 'Work Sans', sans-serif;
-    font-size: .8rem;
-}
-textarea {
-    min-height: 300px;
-}
+
 .button {
-    background: #7c689b;
+    background: #36583f;
     color: #fff;
     font-size: 1rem;
     padding: .75rem 1.5rem;
@@ -184,19 +189,20 @@ textarea {
     margin-bottom: 0;
 }
 .button:not(.button-secondary):hover {
-    background: #63537d;
+    background: #36583f90;
     cursor: pointer;
 }
 .button-secondary {
-    color: #7c689b;
+    color: #36583f;
     background: none;
-    box-shadow: 0 0 0 2px #7c689b inset;
+    box-shadow: 0 0 0 2px #36583f inset;
     transition: box-shadow 0.2s, color 0.2s;
 }
 .button-secondary:hover {
-    color: #63537d;
-    box-shadow: 0 0 0 2px #63537d inset;
+    color: #fff;
+    box-shadow: 0 0 0 2px inherit inset;
     cursor: pointer;
+    background: #36583f90;
 }
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;

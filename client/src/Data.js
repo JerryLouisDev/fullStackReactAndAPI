@@ -29,22 +29,16 @@ export default class Data {
     }
     return fetch(url, options);
   }
-  /**
-   * USER FUNCTIONS
-   */
-
-  //getUser function
+//getUser function
   async getUser(emailAddress, password) {
     const response = await this.api("/users", "GET", null, true, {
       emailAddress,
       password,
     });
 
-    // if the status response code indicates that the request is successful the data is returned
     if (response.status === 200) {
       return response.json().then((data) => data);
     }
-    // if the status response code indicates that the request lacks valid authentication credentials, null is returned
     else if (response.status === 401) {
       return null;
     } else {
@@ -54,11 +48,9 @@ export default class Data {
   //createUser function
   async createUser(user) {
     const response = await this.api("/users", "POST", user);
-    //tests if response code indicates that the request has successed and created a new user
     if (response.status === 201) {
       return [];
     }
-    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;
@@ -68,21 +60,15 @@ export default class Data {
     }
   }
 
-  /**
-   * COURSE FUNCTIONS
-   */
-
   //createCourse function
   async createCourse(course, emailAddress, password) {
     const response = await this.api("/courses", "POST", course, true, {
       emailAddress,
       password,
     });
-    //tests if response code indicates that the request has successed and created a new user
     if (response.status === 201) {
       return [];
     }
-    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;
@@ -94,11 +80,9 @@ export default class Data {
   //getCourse funciton
   async getCourse(id) {
     const response = await this.api(`/courses/${id}`, "GET", null);
-    // console.log(id);
-    // if the status response code indicates that the request is successful the data is returned
+
     if (response.status === 200) {
       return response.json().then((data) => data);
-      // if the status response code indicates that the request lacks valid authentication credentials, null is returned
     } else if (response.status === 404) {
       throw new Error("Course Not Found.");
     } else {
@@ -112,11 +96,9 @@ export default class Data {
       emailAddress,
       password,
     });
-    //tests if the server has fulfilled the request and if there is a No Content response indicating that the page does not need to be replaced
     if (response.status === 204) {
       return [];
     }
-    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then((data) => {
         return data;
@@ -132,11 +114,9 @@ export default class Data {
       emailAddress,
       password,
     });
-    //tests if the server has fulfilled the request and if there is a No Content response indicating that the page does not need to be replaced
     if (response.status === 204) {
       return [];
     }
-    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then((data) => {
         return data.errors;

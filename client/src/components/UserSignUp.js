@@ -92,7 +92,7 @@ export default class UserSignUp extends Component {
     const { context } = this.props;
     const { firstName, lastName, emailAddress, password } = this.state;
 
-    // Creates user if no errors exist
+    // this will create the user when no errors
     const user = {
       firstName,
       lastName,
@@ -114,7 +114,7 @@ export default class UserSignUp extends Component {
               this.props.history.push("/");
             })
             .catch((error) => {
-              console.log(error);
+              console.log('We have an error: ', error);
               this.props.history.push("/error");
             });
         }

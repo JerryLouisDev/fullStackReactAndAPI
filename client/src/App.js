@@ -1,8 +1,8 @@
 //import statements for all components and modules
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./styles/global.css";
 import Header from "./components/Header";
 import NotFound from "./components/NotFound";
 import UserSignUp from "./components/UserSignUp";
@@ -28,10 +28,11 @@ const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 
 function App() {
+  return (
   <Router>
     <div>
       <HeaderWithContext />
-      <Routes>
+      <Switch>
         <Route exact path="/" component={CoursesWithContext} />
         <PrivateRoute
           path="/courses/create"
@@ -49,9 +50,9 @@ function App() {
         <Route path="/error" component={ErrorPage} />
         <Route path="/forbidden" component={Forbidden} />
         <Route component={NotFound} />
-      </Routes>
+      </Switch>
     </div>
-  </Router>;
+  </Router>);
 }
 
 export default App;

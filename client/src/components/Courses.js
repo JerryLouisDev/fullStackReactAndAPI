@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import config from "../config";
 export default class Courses extends Component {
   state = {
     courses: [],
   };
 
-  //Retrieve data from API port, redirect to error page if unsuccessful
-
-  // Referenced this article for help understanding how to set up fetch request: https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/
-
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/courses")
-      .then((response) =>
+      .get(config.apiBaseUrl+"/courses")
+      .then((response) => {
+ 
         this.setState({
           courses: response.data,
-        })
-      )
+        });
+     
+      })
       .catch((errors) => {
         console.log(errors);
         this.props.history.push("/error");
